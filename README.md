@@ -1,2 +1,2 @@
-# rendezvous
-Rendezvous is an event manager application.
+# Rendezvous
+Rendezvous is an event manager application. 
