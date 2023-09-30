@@ -104,21 +104,3 @@ CREATE TABLE event_invitations (
     FOREIGN KEY (sender_id) REFERENCES users(user_id),
     FOREIGN KEY (receiver_id) REFERENCES users(user_id)
 );
-
-CREATE TABLE creates_club_event (
-    user_id INT,
-    club_id INT,
-    event_id INT,
-    PRIMARY KEY (user_id, club_id, event_id),
-    FOREIGN KEY (user_id) REFERENCES club_leaders(user_id),
-    FOREIGN KEY (club_id) REFERENCES club_leaders(club_id),
-    FOREIGN KEY (event_id) REFERENCES events(event_id)
-)
-
-CREATE TABLE creates_personal_event (
-    user_id INT, 
-    event_id INT, 
-    PRIMARY KEY (user_id, event_id),
-    FOREIGN KEY (user_id) REFERENCES users(user_id),
-    FOREIGN KEY (event_id) REFERENCES events(event_id)
-);
