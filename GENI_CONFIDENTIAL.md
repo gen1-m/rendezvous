@@ -131,3 +131,10 @@ app.run(debug=True)
 ` in your terminal.
 
 Now, when you access your Flask application in a web browser, you will see a form where you can enter a name and email address. Upon submission, the data will be stored in the MySQL database. You can modify the HTML template and database schema according to your requirements to display and retrieve data in different ways.
+
+### Links
+
+- [Link 1]("https://blog.logrocket.com/pyscript-run-python-browser/")
+- [Link 2]("https://pynative.com/python-mysql-database-connection/")
+- [Link 3]("https://pynative.com/python-mysql-select-query-to-fetch-data/")
+- [Link 4]("https://www.google.com/search?client=firefox-b-d&q=how+to+display+values+of+a+sql+database+with+python+")
