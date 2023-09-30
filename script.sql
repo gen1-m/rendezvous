@@ -10,3 +10,13 @@ CREATE TABLE clubs (
     club_name VARCHAR(255),
     club_desc VARCHAR(255)
 );
+
+
+CREATE TABLE events (
+    event_id INT PRIMARY KEY,
+    event_size INT,
+    event_name VARCHAR(255),
+    event_desc VARCHAR(255),
+    event_privacy ENUM('private', 'public'),
+    event_time DATETIME
+);
