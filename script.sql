@@ -20,22 +20,28 @@ CREATE TABLE club_participants (
 );
 
 CREATE TABLE club_leaders (
-    club_leader_id INT PRIMARY KEY,
-    FOREIGN KEY (club_id) REFERENCES club_participants(club_id),
-    FOREIGN KEY (user_id) REFERENCES club_participants(user_id)
-)
+    user_id INT,
+    club_id INT,
+    PRIMARY KEY (user_id, club_id),
+    FOREIGN KEY (user_id) REFERENCES club_participants(user_id),
+    FOREIGN KEY (club_id) REFERENCES club_participants(club_id)
+);
 
 CREATE TABLE club_moderators (
-    club_mod_id INT PRIMARY KEY,
-    FOREIGN KEY (club_id) REFERENCES club_participants(club_id),
-    FOREIGN KEY (user_id) REFERENCES club_participants(user_id) 
-)
+    user_id INT,
+    club_id INT,
+    PRIMARY KEY (user_id, club_id),
+    FOREIGN KEY (user_id) REFERENCES club_participants(user_id),
+    FOREIGN KEY (club_id) REFERENCES club_participants(club_id)
+);
 
 CREATE TABLE club_members (
-    club_member_id INT PRIMARY KEY,
-    FOREIGN KEY (club_id) REFERENCES club_participants(club_id),
-    FOREIGN KEY (user_id) REFERENCES club_participants(user_id)    
-)
+    user_id INT,
+    club_id INT,
+    PRIMARY KEY (user_id, club_id),
+    FOREIGN KEY (user_id) REFERENCES club_participants(user_id),
+    FOREIGN KEY (club_id) REFERENCES club_participants(club_id)
+);
 
 CREATE TABLE events (
     event_id INT PRIMARY KEY,
@@ -48,7 +54,10 @@ CREATE TABLE events (
 
 CREATE TABLE club_events (
     club_event_id INT PRIMARY KEY,
-    FOREIGN KEY (event_id) REFERENCES events(event_id)
+    event_id INT,
+    club_id INT,
+    FOREIGN KEY (event_id) REFERENCES events(event_id),
+    FOREIGN KEY (club_id) REFERENCES clubs(club_id)
 );
 
 CREATE TABLE personal_events (
@@ -56,7 +65,7 @@ CREATE TABLE personal_events (
     event_id INT,
     PRIMARY KEY (user_id, event_id),
     FOREIGN KEY (user_id) REFERENCES users(user_id),
-    FOREIGN KEY (event_id) REFERENCES events(user_id)
+    FOREIGN KEY (event_id) REFERENCES events(event_id)
 );
 
 CREATE TABLE event_participants (
@@ -67,16 +76,20 @@ CREATE TABLE event_participants (
     FOREIGN KEY (event_id) REFERENCES events(event_id)
 );
 
-CREATE event_attendees (
+CREATE TABLE event_attendees (
     event_attendee_id INT PRIMARY KEY,
-    FOREIGN KEY (event_id) REFERENCES event_participants(event_id),
-    FOREIGN KEY (user_id) REFERENCES event_participants(user_id)
+    user_id INT,
+    event_id INT,
+    FOREIGN KEY (user_id) REFERENCES event_participants(user_id),
+    FOREIGN KEY (event_id) REFERENCES event_participants(event_id)
 );
 
-CREATE event_leaders (
+CREATE TABLE event_leaders (
     event_leader INT PRIMARY KEY,
-    FOREIGN KEY (event_id) REFERENCES event_participants(event_id),
-    FOREIGN KEY (user_id) REFERENCES event_participants(user_id)    
+    user_id INT,
+    event_id INT,
+    FOREIGN KEY (user_id) REFERENCES event_participants(user_id),
+    FOREIGN KEY (event_id) REFERENCES event_participants(event_id)
 );
 
 CREATE TABLE event_invitations (
