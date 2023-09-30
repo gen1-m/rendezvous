@@ -1,17 +1,18 @@
 CREATE TABLE users (
     user_id INT PRIMARY KEY,
-    username VARCHAR(255),
-    user_password VARCHAR(255)
+    username VARCHAR(32),
+    user_password TEXT
 );
 
 CREATE TABLE clubs (
     club_id INT PRIMARY KEY,
     club_size INT,
-    club_name VARCHAR(255),
+    club_name VARCHAR(32),
     club_desc VARCHAR(255)
 );
 
 CREATE TABLE club_participants (
+    join_date DATETIME,     /*added this*/
     user_id INT,
     club_id INT,
     PRIMARY KEY (user_id, club_id),
@@ -46,7 +47,7 @@ CREATE TABLE club_members (
 CREATE TABLE events (
     event_id INT PRIMARY KEY,
     event_size INT,
-    event_name VARCHAR(255),
+    event_name VARCHAR(32),
     event_desc VARCHAR(255),
     event_privacy ENUM('private', 'public'),
     event_time DATETIME
@@ -69,6 +70,7 @@ CREATE TABLE personal_events (
 );
 
 CREATE TABLE event_participants (
+    rsvp_status ENUM('attending', 'not attending', 'pending'), /*added this*/
     user_id INT,
     event_id INT,
     PRIMARY KEY (user_id, event_id),
@@ -100,6 +102,5 @@ CREATE TABLE event_invitations (
     PRIMARY KEY (event_id, sender_id, receiver_id),
     FOREIGN KEY (event_id) REFERENCES events(event_id),
     FOREIGN KEY (sender_id) REFERENCES users(user_id),
-    FOREIGN KEY (receiver_id) REFERENCES users(user_id),
-    CHECK (sender_id <> receiver_id)
+    FOREIGN KEY (receiver_id) REFERENCES users(user_id)
 );
