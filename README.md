@@ -6,7 +6,7 @@ After you have successfully cloned the repo on your machine (assuming you know h
 
 ### Step 1
 
-This command creates a virtual environment to install python packages using _pip_ command. 
+This command creates a virtual  environment to install python packages using _pip_ command. 
 
 `python -m venv ./env`
 
