@@ -6,18 +6,40 @@ try:
                                 user='testuser', 
                                 password='password')
 
-    if connection.is_connected():
-        db_Info = connection.get_server_info()
-        print("Connected to MySQL Server version ", db_Info)
-        cursor = connection.cursor()
-        cursor.execute("select database();")
-        record = cursor.fetchone()
-        print("You're connected to database: ", record)
+    sql_select_query = "select * from test"
+    cursor = connection.cursor()
+    cursor.execute(sql_select_query)
 
-except sqlcon.Error as e:
-    print("Error while connecting to MySQL", e)
+    records = cursor.fetchall()
+    print("Total number of rows in table: ", cursor.rowcount)
+
+    print("\nPrinting each row")
+    for row in records:
+        print("Id = ", row[0], )
+        print("Name = ", row[1], )
+        # print("Price = ", row[2], )
+        # print("Purchase date = ", row[3], "\n")
+
+except sqlcon.Error as e: 
+    print("Error reading data from MySQL table", e)
 finally:
     if connection.is_connected():
-        cursor.close()
         connection.close()
-        print("MySQL connection is closed")
+        cursor.close()
+        print("MySQL connection is closed!")
+
+    # if connection.is_connected():
+    #     db_Info = connection.get_server_info()
+    #     print("Connected to MySQL Server version ", db_Info)
+    #     cursor = connection.cursor()
+    #     cursor.execute("select database();")
+    #     record = cursor.fetchone()
+    #     print("You're connected to database: ", record)
+
+# except sqlcon.Error as e:
+#     print("Error while connecting to MySQL", e)
+# finally:
+#     if connection.is_connected():
+#         cursor.close()
+#         connection.close()
+#         print("MySQL connection is closed")
