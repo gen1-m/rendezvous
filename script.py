@@ -15,7 +15,7 @@ db_config = {
 def get_table_data(table_name):
     try:
         connection = sqlcon.connect(**db_config)
-        cursor = connection.cursor()
+        cursor = connection.cursor(dictionary=True)
 
         query = f"SELECT * FROM {table_name}"
         cursor.execute(query)

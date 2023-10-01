@@ -18,4 +18,13 @@ git commit -m "Added test connection script 'py_script.py', requirements.txt and
 
 ### Step 3
 
-Just use the goddamn script!!!! thx <333
+Edit the _db_config_ dictionary inside the **_script.py_** to match you local database.
+
+```python
+db_config = {
+    'host': 'localhost', 
+    'user': 'testuser', 
+    'password': 'password',
+    'database': 'testdb'
+}
+```
