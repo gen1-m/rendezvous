@@ -84,5 +84,41 @@ JOIN event_invitations ei ON u.user_id = ei.receiver_id
 WHERE ei.accept_before < NOW();
 
 --  Anja's scripts
-SELECT asgje FROM Anja;
+
+--Select the total numbers of club moderators in each club
+SELECT c.club_name, COUNT(cm.user_id) AS moderator_count
+FROM clubs c
+LEFT JOIN club_moderators cm ON c.club_id = cm.club_id
+GROUP BY c.club_name;
+
+--Select club moderatores usernames for each club
+SELECT c.club_name, u.username AS moderator_username
+FROM clubs c
+JOIN club_moderators cm ON c.club_id = cm.club_id
+JOIN users u ON cm.user_id = u.user_id;
+
+--Select events with the total number of attendees
+SELECT e.event_name, COUNT(ea.user_id) AS attendee_count
+FROM events e
+LEFT JOIN event_attendees ea ON e.event_id = ea.event_id
+GROUP BY e.event_name;
+
+--Select users members of at least one club
+SELECT DISTINCT u.username
+FROM users u
+JOIN club_members cm ON u.user_id = cm.user_id;
+
+--Select club members (not moderatores and not leaders)
+SELECT DISTINCT u.username
+FROM users u
+JOIN club_members cm ON u.user_id = cm.user_id
+LEFT JOIN club_leaders cl ON u.user_id = cl.user_id
+LEFT JOIN club_moderators cmr ON u.user_id = cmr.user_id
+WHERE cl.user_id IS NULL AND cmr.user_id IS NULL;
+
+--Select users who have sent an event invitation
+SELECT DISTINCT u.username
+FROM users u
+JOIN event_invitations ei ON u.user_id = ei.sender_id;
+
 
