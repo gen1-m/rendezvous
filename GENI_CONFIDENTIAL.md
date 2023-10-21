@@ -92,9 +92,7 @@ return 'Data submitted successfully!'
 
 5. Create the HTML template:
 
-- Create a new folder called `templates` in the same directory as your `http://app.py
-
-` file.
+- Create a new folder called `templates` in the same directory as your `http://app.py` file.
 
 - Inside the `templates` folder, create a new HTML file, e.g., `index.html`, with a form:
 
@@ -114,9 +112,7 @@ return 'Data submitted successfully!'
 
 6. Run the application:
 
-- Add the following code at the bottom of your `http://app.py
-
-` file:
+- Add the following code at the bottom of your `http://app.py` file:
 
 ```python
 
@@ -126,9 +122,7 @@ app.run(debug=True)
 
 ```
 
-- Start your application by running `python http://app.py
-
-` in your terminal.
+- Start your application by running `python http://app.py` in your terminal.
 
 Now, when you access your Flask application in a web browser, you will see a form where you can enter a name and email address. Upon submission, the data will be stored in the MySQL database. You can modify the HTML template and database schema according to your requirements to display and retrieve data in different ways.
 

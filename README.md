@@ -28,3 +28,10 @@ db_config = {
     'database': 'testdb'
 }
 ```
+
+## For contributors!
+
+The actual state of the app is that through the input form in the html page,
+you can only input values for a simple table in my database called **test**.
+In order to put values for the other tables the function `submit` should be
+modified. For now, leave it as it is, especially Xhesi, DON'T TOUCH IT!

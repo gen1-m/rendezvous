@@ -1,7 +1,7 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 import mysql.connector as sqlcon
 
-# 
+# Initializing app 
 app = Flask(__name__)
 
 db_config = {
@@ -41,8 +41,6 @@ def get_schema_info():
         query_result = cursor.fetchall()
         tables = [table[0] for table in query_result]
 
-        print(query_result)
-
         cursor.close()
         connection.close()
 
@@ -60,5 +58,30 @@ def home():
 
     return render_template('index.html', schema_info=schema_info)
 
+# Adding a new route for handling form submission
+@app.route('/submit', methods=['POST'])
+def submit():
+    try:
+        connection = sqlcon.connect(**db_config)
+        cursor = connection.cursor()
+
+        # Trying to add values to test
+        query = "INSERT INTO test (test_id, test_name) VALUES (%s, %s)"
+        # To request Id is bad practice, don't do this at home cuna dhe goca :)
+        values = (request.form['id'], request.form['name'])
+
+        cursor.execute(query, values)
+        connection.commit()
+
+        cursor.close()
+        connection.close()
+
+        # Redirect back to the home page after submission
+        return redirect('/')
+
+    except sqlcon.Error as e:
+        print(f"Error: {e}")
+        return "Error occurred during submission"
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="localhost", port=6942, debug=True)
